@@ -15,6 +15,24 @@ signUpRoute.route('/add').post(function(req,res){
         });
 });
 
+signUpRoute.route('/').get(function(req,res){
+    SignUp.find(function(err,data){
+        if(err){
+            console.log(err);
+        } else {
+            console.log("user list get-",data);
+            res.json(data);
+        }
 
+    });
+});
+
+// Defined delete | remove | destroy route
+signUpRoute.route('/delete/:id').get(function (req, res) {
+    SignUp.findByIdAndRemove({_id: req.params.id}, function(err, data){
+        if(err) res.json(err);
+        else res.json('Successfully removed');
+    });
+});
 
 module.exports = signUpRoute;

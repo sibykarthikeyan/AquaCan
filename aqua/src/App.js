@@ -7,6 +7,7 @@ import axios from 'axios';
 import SignUp from './Components/signUp';
 import Login from './Components/login';
 import Edit from './Components/edit';
+import Home from './Components/home';
 
 
 class App extends Component {
@@ -123,9 +124,9 @@ class App extends Component {
             <Link to='/'>Aqua</Link>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
+                {/**<li className="nav-item">
                   <Link to='/' className="nav-link">Home</Link>
-                </li>
+                  </li> */}
                 <li className="nav-item">
                   <Link to='/signUp' className="nav-link">SignUp</Link>
                 </li>
@@ -138,6 +139,11 @@ class App extends Component {
           <br/>
           
           <Switch>
+            <Route exact path='/' 
+              render={
+                () => <Home/>
+              }
+            />
             <Route exact path='/signUp' 
               render={ () => <SignUp 
                 onChange={this.handleChange}
