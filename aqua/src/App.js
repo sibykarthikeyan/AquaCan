@@ -46,6 +46,26 @@ class App extends Component {
    
   };
 
+  handleUpdate = formValue => {
+    formValue.preventDefault();
+    let data = this.state.fields;
+    console.log("siby form value update",JSON.stringify(data,undefined,4));
+    if(this.validateSignUpForm()){
+      let fields = {};
+      fields["userName"] = "";
+      fields["emailId"] = "";
+      fields["mobileNumber"] = "";
+      fields["password"] = "";
+
+           
+      axios.post('http://localhost:4000/signUp/update/'+this.props.match.params.id, data)
+        .then(res => console.log("axios update resp",res.data));
+        this.setState({fields});
+    alert ("Updated succesfully");
+    }
+   
+  };
+
   handleLogin = loginValue => {
     loginValue.preventDefault();
     let data = this.state.loginFields;
@@ -152,7 +172,15 @@ class App extends Component {
                 onRegister = {this.handleRegister}
                 />}
             />
-            <Route path='/edit/:id' component={Edit}/>
+            <Route path='/edit/:id' 
+              render = { (props) => <Edit
+                {...props}
+                onChange={this.handleChange}
+                fields = {this.state.fields} 
+                errors = {this.state.errors}
+                onUpdate = {this.handleUpdate}
+              />}
+            />
             <Route path='/login' 
               render = { () => <Login
                 onChange={this.handleChange}
