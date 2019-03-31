@@ -14,6 +14,10 @@ let UserSchema = new Schema({
   },
   password: {
     type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
   }
 },{
     collection: 'userManagement'

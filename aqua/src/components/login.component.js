@@ -27,17 +27,15 @@ export default class Login extends Component {
   onSubmit(e) {
     e.preventDefault();
     const obj = {
-      person_name: this.state.person_name,
-      business_name: this.state.business_name,
-      business_gst_number: this.state.business_gst_number
+      email: this.state.email,
+      password: this.state.password
     };
-    axios.post('http://localhost:4000/business/add', obj)
+    axios.post('http://localhost:4000/business/login', obj)
         .then(res => console.log(res.data));
     
     this.setState({
-      person_name: '',
-      business_name: '',
-      business_gst_number: ''
+      email: '',
+      password: ''
     })
     this.props.history.push('/');
   }
